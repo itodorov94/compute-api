@@ -4,12 +4,12 @@ from . import exceptions
 
 from .config import OPERATIONS_DICT, CSV
 
+
 class FileHandler:
 
     def __init__(self, file_name):
         self.file_name = file_name
         self.file_extension = file_name.rsplit('.')[1]
-
 
     def load_file_content(self):
         """Returns parsed file based on file extension ready for calculation"""
@@ -31,7 +31,7 @@ class FileHandler:
         wb = openpyxl.load_workbook(self.file_name)
         sheet = wb.active
         rows = list(sheet.rows)
-        rows = rows[1:] # Remove cell names
+        rows = rows[1:]  # Remove cell names
 
         for row in rows:
             row_content = []
@@ -52,7 +52,6 @@ class FileHandler:
             raise exceptions.WrongOperationException('Invalid Operator')
         if row[1] == '/' and str(row[2]) == '0':
             raise exceptions.DivisionByZeroException('Cannot have 0 as second operand due to Zero Division')
-
 
     def compute_file_content(self):
         file_content = self.load_file_content()

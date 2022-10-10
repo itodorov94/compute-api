@@ -2,11 +2,11 @@
 import operator
 
 OPERATIONS_DICT = {
-    '+' : operator.add,
-    '-' : operator.sub,
-    '*' : operator.mul,
-    '/' : operator.truediv
-    }
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.truediv
+}
 
 
 CSV = 'csv'

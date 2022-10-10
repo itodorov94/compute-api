@@ -3,6 +3,7 @@ import os
 
 from .models import Request, Result
 
+
 class RequestAdmin(admin.ModelAdmin):
     list_display = ['user_name', 'get_file_name', 'upload_date']
 
@@ -11,8 +12,6 @@ class RequestAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         return qs.filter(user_name=request.user)
-
-
 
     def get_file_name(self, obj):
         return os.path.basename(obj.file_name.name)
@@ -35,6 +34,7 @@ class ResultAdmin(admin.ModelAdmin):
         return obj.request.file_name.name
 
     get_request.short_description = 'Request'
+
 
 admin.site.register(Request, RequestAdmin)
 admin.site.register(Result, ResultAdmin)

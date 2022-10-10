@@ -5,6 +5,7 @@ from django.test import SimpleTestCase
 from api.exceptions import DivisionByZeroException, InvalidFileColumns, NotANumberException, WrongOperationException
 from api.file import FileHandler
 
+
 class FileComputeTestCase(SimpleTestCase):
     """
     Class containing unit tests for the file computation

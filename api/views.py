@@ -12,6 +12,7 @@ from .tasks import compute_request_content
 
 logger = logging.getLogger('server_log')
 
+
 class RegisterView(generics.CreateAPIView):
     """
     View for registering new users
@@ -27,7 +28,6 @@ class FileUploadView(views.APIView):
     """
     permission_classes = (permissions.IsAuthenticated,)
 
-
     def post(self, request):
 
         username = request.user
@@ -42,10 +42,10 @@ class FileUploadView(views.APIView):
             file_extension = file_name.rsplit('.')[1]
         except IndexError as e:
             logger.error(str(e))
-            return Response('File name does not have an extension. Please provide one',status=status.HTTP_400_BAD_REQUEST)
+            return Response('File name does not have an extension. Please provide one', status=status.HTTP_400_BAD_REQUEST)
 
         if file_extension in SUPPORTED_FORMATS:
-            req = Request.objects.create(user_name = username, file_name = file_obj)
+            req = Request.objects.create(user_name=username, file_name=file_obj)
             logger.info('File is saved and request object created')
         else:
             logger.error(f'Received not supported file {file_extension}')

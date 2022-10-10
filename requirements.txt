@@ -1,6 +1,6 @@
 django
 djangorestframework
-ipython
-celery
-django-prometheus
-openpyxl
+celery # Used for sending async tasks to rabbitmq broker
+django-prometheus #
+openpyxl # Used for reading xlsx files
+flake8 # Used for linting
