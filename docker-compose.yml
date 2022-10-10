@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  django:
+    image: test:latest
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
+    # '/start' is the shell script used to run the service
+    command: >
+        bash -c "python manage.py runserver 0.0.0.0:9001"
+
+    # this volume is used to map the files and folders on the host to the container
+    # so if we change code on the host, code in the docker container will also be changed
+    volumes:
+      - .:/code
+    ports:
+      - 9001:9001
+    depends_on:
+      - rabbitmq
+    # env_file is used to manage the env variables of our project
+    # env_file:
+    #   - ./.env/.dev-sample
+    # depends_on:
+      # - redis
+
+  rabbitmq:
+    image: rabbitmq:3
+
+  celery:
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
+    image: test:latest
+    volumes:
+      - .:/code
+    command: "celery -A django_api worker -l DEBUG"
+    depends_on:
+      - django
+      - rabbitmq
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+    ports:
+      - "9091:9090"
+
+
+
+
+
