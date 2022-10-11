@@ -53,3 +53,8 @@ and login with `admin/admin` for username and password. To setup Grafana to use 
 Configured dashboard with Django metrics
 
 <img src="grafana.png"/>
+
+## Continuous integration pipeline
+
+
+The CI pipeline covers the DEV scenario consisting of running Python Linter flake8 and running the Django unit tests. It is triggered on each commit to `dev` branch and pull request to `main` branch. It is implemented using GitHub Actions.
