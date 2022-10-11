@@ -16,6 +16,8 @@ class RequestAdmin(admin.ModelAdmin):
     def get_file_name(self, obj):
         return os.path.basename(obj.file_name.name)
 
+    get_file_name.short_description = 'File Name'
+
 
 class ResultAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
