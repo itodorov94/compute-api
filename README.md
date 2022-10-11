@@ -2,7 +2,7 @@
 
 ## Installation
 
-This API is running in a docker container and all needed services are ran using Docker and Docker Compose. It is for a development purpose so a Django local database is used.
+This API is running in a docker container and all needed services are run using Docker and Docker Compose. It is for a development purpose so a Django local database is used.
 
 To run all the containers just run `docker compose up`
 
