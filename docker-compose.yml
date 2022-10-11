@@ -2,11 +2,9 @@ version: '3.8'
 
 services:
   django:
-    image: test:latest
-    # build:
-    #   context: .
-    #   dockerfile: ./Dockerfile
-    # '/start' is the shell script used to run the service
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     command: >
         bash -c "python manage.py runserver 0.0.0.0:9001"
 
@@ -18,20 +16,15 @@ services:
       - 9001:9001
     depends_on:
       - rabbitmq
-    # env_file is used to manage the env variables of our project
-    # env_file:
-    #   - ./.env/.dev-sample
-    # depends_on:
-      # - redis
+
 
   rabbitmq:
     image: rabbitmq:3
 
   celery:
-    # build:
-    #   context: .
-    #   dockerfile: ./Dockerfile
-    image: test:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     volumes:
       - .:/code
     command: "celery -A django_api worker -l DEBUG"
@@ -46,7 +39,11 @@ services:
     ports:
       - "9091:9090"
 
-
-
-
+  grafana:
+    hostname: grafana
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
 
