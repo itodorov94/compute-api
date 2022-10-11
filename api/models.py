@@ -8,6 +8,9 @@ class Request(ExportModelOperationsMixin('request'), models.Model):
     file_name = models.FileField(upload_to='resources/', default='')
     upload_date = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.file_name.name
+
 
 class Result(ExportModelOperationsMixin('result'), models.Model):
 
